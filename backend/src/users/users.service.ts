@@ -9,9 +9,12 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private repo: Repository<User>,
-  ) {}
+  ) { }
 
   async create(data: Partial<User>): Promise<User> {
+    if (!data.password) {
+      throw new Error('Password is required');
+    }
     const hashed = await bcrypt.hash(data.password, 10);
     const user = this.repo.create({ ...data, password: hashed });
     return this.repo.save(user);
