@@ -1,10 +1,11 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Event } from './entities/event.entity';
 import { CreateEventDto } from './dto/create-event.dto';
 import { User } from '../users/entities/user.entity';
 import { UpdateEventDto } from './dto/update-event.dto';
+import { EventStatus } from './entities/event.entity';
 
 @Injectable()
 export class EventsService {
@@ -28,5 +29,19 @@ export class EventsService {
     }
     Object.assign(event, dto);
     return this.repo.save(event);
+  }
+
+  async updateStatus(id: string, newStatus: EventStatus): Promise<Event> {
+    const event = await this.repo.findOne({ where: { id } });
+    if (!event) throw new NotFoundException('Event not found');
+    if (event.status === EventStatus.CANCELED) {
+      throw new BadRequestException('Cannot change status of a canceled event');
+    }
+    event.status = newStatus;
+    return this.repo.save(event);
+  }
+  
+  async findPublished(): Promise<Event[]> {
+    return this.repo.find({ where: { status: EventStatus.PUBLISHED } });
   }
 }
