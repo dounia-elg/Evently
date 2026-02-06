@@ -2,9 +2,10 @@ import { Injectable, BadRequestException, NotFoundException, ConflictException, 
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Reservation } from './entities/reservation.entity';
-import { User } from '../users/entities/user.entity';
+import { User, UserRole } from '../users/entities/user.entity';
 import { Event, EventStatus } from '../events/entities/event.entity';
 import { ReservationStatus } from './entities/reservation.entity';
+
 
 @Injectable()
 export class ReservationsService {
@@ -63,6 +64,22 @@ export class ReservationsService {
     }
     
     reservation.status = newStatus;
+    return this.reservationRepo.save(reservation);
+  }
+
+  async cancel(id: string, user: User): Promise<Reservation> {
+  
+    const reservation = await this.reservationRepo.findOne({ 
+      where: { id },
+      relations: ['participant']
+    });
+    if (!reservation) throw new NotFoundException('Reservation not found');
+    
+    if (user.role !== UserRole.ADMIN && reservation.participant.id !== user.id) {
+      throw new ForbiddenException('You can only cancel your own reservation');
+    }
+   
+    reservation.status = ReservationStatus.CANCELED;
     return this.reservationRepo.save(reservation);
   }
 }
