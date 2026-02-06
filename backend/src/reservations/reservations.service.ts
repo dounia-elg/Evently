@@ -5,6 +5,7 @@ import { Reservation } from './entities/reservation.entity';
 import { User, UserRole } from '../users/entities/user.entity';
 import { Event, EventStatus } from '../events/entities/event.entity';
 import { ReservationStatus } from './entities/reservation.entity';
+import { TicketsService } from '../tickets/tickets.service';
 
 
 @Injectable()
@@ -14,6 +15,7 @@ export class ReservationsService {
     private reservationRepo: Repository<Reservation>,
     @InjectRepository(Event)
     private eventRepo: Repository<Event>,
+    private readonly ticketsService: TicketsService,
   ) { }
 
   async create(eventId: string, user: User): Promise<Reservation> {
@@ -52,7 +54,7 @@ export class ReservationsService {
 
     const reservation = await this.reservationRepo.findOne({
       where: { id },
-      relations: ['event']
+      relations: ['event', 'participant']
     });
     if (!reservation) throw new NotFoundException('Reservation not found');
 
@@ -67,6 +69,12 @@ export class ReservationsService {
       if (confirmedCount >= reservation.event.maxCapacity) {
         throw new BadRequestException('Cannot confirm: Event is at full capacity');
       }
+      reservation.status = newStatus;
+
+      const savedReservation = await this.reservationRepo.save(reservation);
+      await this.ticketsService.createTicket(savedReservation);
+
+      return savedReservation;
     }
 
     reservation.status = newStatus;
@@ -87,5 +95,12 @@ export class ReservationsService {
 
     reservation.status = ReservationStatus.CANCELED;
     return this.reservationRepo.save(reservation);
+  }
+
+  async findOne(id: string): Promise<Reservation | null> {
+    return this.reservationRepo.findOne({
+      where: { id },
+      relations: ['participant', 'event']
+    });
   }
 }
