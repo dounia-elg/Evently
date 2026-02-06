@@ -4,6 +4,8 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
+import { EventsModule } from './events/events.module';
+import { Event } from './events/entities/event.entity';
 
 @Module({
   imports: [
@@ -15,12 +17,13 @@ import { User } from './users/entities/user.entity';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [User],
+      entities: [User, Event],
       synchronize: true, 
     }),
     
     AuthModule,
     UsersModule,
+    EventsModule,
   ],
 })
 export class AppModule {}
