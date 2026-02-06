@@ -18,7 +18,7 @@ export class RegisterDto {
   password: string;
 
   @IsEnum(UserRole)
-  @IsOptional() 
+  @IsOptional()
   role?: UserRole;
 }
 
