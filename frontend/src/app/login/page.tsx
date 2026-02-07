@@ -33,7 +33,7 @@ export default function LoginPage() {
             if (data.user.role === 'ADMIN') {
                 router.push('/admin');
             } else {
-                router.push('/');
+                router.push('/participant');
             }
         } catch (err: any) {
             console.error('Login failed:', err);

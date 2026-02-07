@@ -39,4 +39,10 @@ export class ReservationsController {
   findAllAdmin() {
     return this.reservationsService.findAll();
   }
+
+  @Get('me')
+  @UseGuards(JwtAuthGuard)
+  findMyReservations(@Req() req: any) {
+    return this.reservationsService.findByParticipant(req.user.id);
+  }
 }

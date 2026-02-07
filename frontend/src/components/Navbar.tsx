@@ -40,14 +40,17 @@ export default function Navbar() {
                             </>
                         ) : (
                             <div className="flex items-center gap-6">
-                                <div className="hidden sm:flex items-center gap-3 px-4 py-2 bg-gray-50 rounded-2xl border border-gray-100">
+                                <Link
+                                    href={user?.role === 'ADMIN' ? '/admin' : '/participant'}
+                                    className="hidden sm:flex items-center gap-3 px-4 py-2 bg-gray-50 rounded-2xl border border-gray-100 hover:bg-white transition-all hover:shadow-sm"
+                                >
                                     <div className="w-8 h-8 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600">
                                         <UserIcon className="w-4 h-4" />
                                     </div>
                                     <span className="text-sm font-black text-gray-900">
                                         {user?.firstName}
                                     </span>
-                                </div>
+                                </Link>
                                 <button
                                     onClick={logout}
                                     className="p-3 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-2xl transition-all"
