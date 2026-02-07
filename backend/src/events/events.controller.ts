@@ -10,17 +10,17 @@ import { StatusUpdateDto } from './dto/status-update.dto';
 
 @Controller('events')
 export class EventsController {
-  constructor(private eventsService: EventsService) {}
+  constructor(private eventsService: EventsService) { }
 
   @Post()
-  @Roles(UserRole.ADMIN) 
+  @Roles(UserRole.ADMIN)
   @UseGuards(JwtAuthGuard, RolesGuard)
   create(@Body() dto: CreateEventDto, @Req() req: any) {
     return this.eventsService.create(dto, req.user);
   }
 
   @Put(':id')
-  @Roles(UserRole.ADMIN) 
+  @Roles(UserRole.ADMIN)
   @UseGuards(JwtAuthGuard, RolesGuard)
   update(@Param('id') id: string, @Body() dto: UpdateEventDto) {
     return this.eventsService.update(id, dto);
@@ -32,9 +32,14 @@ export class EventsController {
   updateStatus(@Param('id') id: string, @Body() dto: StatusUpdateDto) {
     return this.eventsService.updateStatus(id, dto.status);
   }
- 
+
   @Get()
   findAllPublic() {
     return this.eventsService.findPublished();
+  }
+
+  @Get(':id')
+  findOnePublic(@Param('id') id: string) {
+    return this.eventsService.findOnePublished(id);
   }
 }

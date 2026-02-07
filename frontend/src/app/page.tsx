@@ -3,6 +3,7 @@ import { Event } from '@/types';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import { Calendar, MapPin, ArrowRight, Star } from 'lucide-react';
+import Link from 'next/link';
 
 export default async function Home() {
   let events: Event[] = [];
@@ -99,10 +100,13 @@ export default async function Home() {
                         </div>
                       </div>
 
-                      <button className="w-full py-5 bg-gray-900 text-white rounded-[2rem] font-black text-lg transition-all flex items-center justify-center gap-3 hover:bg-black active:scale-95 shadow-xl shadow-gray-200 mt-4 group/btn">
+                      <Link
+                        href={`/events/${event.id}`}
+                        className="w-full py-5 bg-gray-900 text-white rounded-[2rem] font-black text-lg transition-all flex items-center justify-center gap-3 hover:bg-black active:scale-95 shadow-xl shadow-gray-200 mt-4 group/btn text-center"
+                      >
                         Get Ticket
                         <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-2 transition-transform" />
-                      </button>
+                      </Link>
                     </div>
                   </div>
 
