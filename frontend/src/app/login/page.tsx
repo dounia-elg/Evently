@@ -6,11 +6,13 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Ticket, ArrowRight, Mail, Lock } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import { loginUser } from '@/lib/api';
+import { useAuth } from '@/context/AuthContext';
 
 export default function LoginPage() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const isRegistered = searchParams.get('registered') === 'true';
+    const { login } = useAuth();
 
     const [formData, setFormData] = useState({
         email: '',
@@ -26,8 +28,7 @@ export default function LoginPage() {
 
         try {
             const data = await loginUser(formData);
-            localStorage.setItem('token', data.access_token);
-            localStorage.setItem('user', JSON.stringify(data.user));
+            login(data);
 
             router.push('/');
         } catch (err: any) {
