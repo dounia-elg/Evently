@@ -103,4 +103,11 @@ export class ReservationsService {
       relations: ['participant', 'event']
     });
   }
+
+  async findAll(): Promise<Reservation[]> {
+    return this.reservationRepo.find({
+      relations: ['participant', 'event'],
+      order: { createdAt: 'DESC' }
+    });
+  }
 }

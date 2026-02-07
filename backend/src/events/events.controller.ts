@@ -33,6 +33,13 @@ export class EventsController {
     return this.eventsService.updateStatus(id, dto.status);
   }
 
+  @Get('all')
+  @Roles(UserRole.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  findAllAdmin() {
+    return this.eventsService.findAll();
+  }
+
   @Get()
   findAllPublic() {
     return this.eventsService.findPublished();

@@ -24,3 +24,11 @@ export interface AuthContextType {
     logout: () => void;
     isAuthenticated: boolean;
 }
+
+export interface Reservation {
+    id: string;
+    status: 'PENDING' | 'CONFIRMED' | 'REFUSED' | 'CANCELED';
+    createdAt: string;
+    participant: User;
+    event: Event;
+}

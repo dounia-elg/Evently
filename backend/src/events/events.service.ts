@@ -62,4 +62,8 @@ export class EventsService {
       throw error;
     }
   }
+
+  async findAll(): Promise<Event[]> {
+    return this.repo.find({ order: { createdAt: 'DESC' } });
+  }
 }
