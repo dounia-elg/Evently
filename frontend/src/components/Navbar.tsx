@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { Ticket, LogOut, User as UserIcon } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
