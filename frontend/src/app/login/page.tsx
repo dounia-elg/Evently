@@ -30,7 +30,11 @@ export default function LoginPage() {
             const data = await loginUser(formData);
             login(data);
 
-            router.push('/');
+            if (data.user.role === 'ADMIN') {
+                router.push('/admin');
+            } else {
+                router.push('/');
+            }
         } catch (err: any) {
             console.error('Login failed:', err);
             setError(err.response?.data?.message || 'Invalid email or password');
