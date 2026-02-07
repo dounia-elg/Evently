@@ -6,8 +6,8 @@ export default function Hero() {
         <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-white">
             {/* Animated Background Elements */}
             <div className="absolute inset-0 -z-10">
-                <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-gradient-to-br from-amber-100/50 to-orange-100/30 rounded-full blur-[120px] animate-pulse"></div>
-                <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-gradient-to-br from-rose-100/50 to-pink-100/30 rounded-full blur-[120px] animate-pulse delay-700"></div>
+                <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-linear-to-br from-amber-100/50 to-orange-100/30 rounded-full blur-[120px] animate-pulse"></div>
+                <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-linear-to-br from-rose-100/50 to-pink-100/30 rounded-full blur-[120px] animate-pulse delay-700"></div>
 
                 {/* Subtle Subtle Grid */}
                 <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{
@@ -31,7 +31,7 @@ export default function Hero() {
                         <div className="space-y-6">
                             <h1 className="text-6xl lg:text-8xl font-black text-gray-900 tracking-tight leading-[0.9]">
                                 Create <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-orange-600 to-rose-600">
+                                <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-500 via-orange-600 to-rose-600">
                                     Memories
                                 </span> <br />
                                 Together.
@@ -44,12 +44,12 @@ export default function Hero() {
 
                         {/* CTA Buttons */}
                         <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                            <button className="px-10 py-5 bg-gray-900 text-white rounded-[2rem] font-bold text-lg shadow-2xl hover:bg-black transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3">
+                            <button className="px-10 py-5 bg-gray-900 text-white rounded-4xl font-bold text-lg shadow-2xl hover:bg-black transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-3">
                                 Get Started
                                 <ArrowRight className="w-5 h-5" />
                             </button>
 
-                            <button className="px-10 py-5 bg-white text-gray-900 border-2 border-gray-100 rounded-[2rem] font-bold text-lg hover:border-gray-900 transition-all hover:scale-105 active:scale-95">
+                            <button className="px-10 py-5 bg-white text-gray-900 border-2 border-gray-100 rounded-4xl font-bold text-lg hover:border-gray-900 transition-all hover:scale-105 active:scale-95">
                                 View Events
                             </button>
                         </div>
@@ -73,7 +73,7 @@ export default function Hero() {
                     {/* Right Side - Visual Section */}
                     <div className="relative lg:block">
                         {/* Main Image Decoration */}
-                        <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-[12px] border-red-600">
+                        <div className="relative aspect-4/5 rounded-[3rem] overflow-hidden shadow-2xl border-12 border-red-600">
                             <img
                                 src="https://www.prestagency.com/photos/590x662/technique_led1.jpg"
                                 alt="Event Atmosphere"

@@ -163,7 +163,7 @@ export default function NewEventPage() {
                                             required
                                             value={formData.description}
                                             onChange={handleChange}
-                                            className="w-full pl-12 pr-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-500/10 focus:border-red-500 transition-all font-bold placeholder:text-gray-300 resize-none h-full min-h-[300px]"
+                                            className="w-full pl-12 pr-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-500/10 focus:border-red-500 transition-all font-bold placeholder:text-gray-300 resize-none h-full min-h-75"
                                             placeholder="Provide a compelling overview of what participants should expect..."
                                         />
                                     </div>

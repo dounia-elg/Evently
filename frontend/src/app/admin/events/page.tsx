@@ -49,7 +49,7 @@ export default function AdminEventsPage() {
 
     return (
         <div className="space-y-6">
-            <div className="flex justify-end bg-gray-100 p-6 rounded-[2rem] ">
+            <div className="flex justify-end bg-gray-100 p-6 rounded-4xl">
                 <Link
                     href="/admin/events/new"
                     className="flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-black transition-all active:scale-95 shadow-lg shadow-gray-200"
@@ -60,7 +60,7 @@ export default function AdminEventsPage() {
             </div>
 
             {error && (
-                <div className="bg-red-50 border border-red-100 p-6 rounded-[2rem] flex items-center gap-4 text-red-600 font-bold">
+                <div className="bg-red-50 border border-red-100 p-6 rounded-4xl flex items-center gap-4 text-red-600 font-bold">
                     <AlertCircle className="w-6 h-6" />
                     {error}
                 </div>

@@ -69,7 +69,7 @@ export default function EventDetails() {
         <div className="min-h-screen bg-gray-200 flex flex-col items-center justify-center p-8 text-center">
             <h1 className="text-4xl font-black text-gray-900 mb-4 uppercase">Experience Missing</h1>
             <p className="text-gray-500 font-bold mb-8 uppercase tracking-widest">{error || 'This protocol does not exist.'}</p>
-            <Link href="/" className="px-8 py-4 bg-gray-900 text-white rounded-[2rem] font-black uppercase tracking-widest">
+            <Link href="/" className="px-8 py-4 bg-gray-900 text-white rounded-4xl font-black uppercase tracking-widest">
                 Return to Directory
             </Link>
         </div>
@@ -90,7 +90,7 @@ export default function EventDetails() {
                     </Link>
 
                     {/* Creative Event Detail Card */}
-                    <div className="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-gray-100 flex flex-col md:flex-row min-h-[600px]">
+                    <div className="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-gray-100 flex flex-col md:flex-row min-h-150">
 
                         {/* Left Side */}
                         <div className="md:w-1/3 bg-red-600 p-12 flex flex-col justify-between text-white relative overflow-hidden">
@@ -123,7 +123,7 @@ export default function EventDetails() {
                         {/* Right Side */}
                         <div className="md:w-2/3 p-12 lg:p-16 flex flex-col justify-between relative">
                             {/* Perforation Effect */}
-                            <div className="hidden md:block absolute left-[-12px] top-1/2 -translate-y-1/2 w-6 h-6 bg-gray-200 rounded-full border border-gray-100 shadow-inner"></div>
+                            <div className="hidden md:block absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-gray-200 rounded-full border border-gray-100 shadow-inner"></div>
 
                             <div className="space-y-10">
                                 <div className="space-y-4">

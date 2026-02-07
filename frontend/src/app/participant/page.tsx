@@ -85,7 +85,7 @@ export default function ParticipantDashboard() {
                 </div>
 
                 {error && (
-                    <div className="p-6 bg-red-50 border border-red-100 text-red-600 rounded-[2rem] font-bold flex items-center gap-4 mb-8">
+                    <div className="p-6 bg-red-50 border border-red-100 text-red-600 rounded-4xl font-bold flex items-center gap-4 mb-8">
                         <AlertCircle className="w-6 h-6" />
                         {error}
                     </div>
@@ -184,7 +184,7 @@ export default function ParticipantDashboard() {
                             </p>
                             <Link
                                 href="/"
-                                className="mt-8 px-8 py-4 bg-red-600 text-white rounded-[2rem] font-black uppercase tracking-widest shadow-xl shadow-red-200 hover:bg-red-700 transition-all active:scale-95"
+                                className="mt-8 px-8 py-4 bg-red-600 text-white rounded-4xl font-black uppercase tracking-widest shadow-xl shadow-red-200 hover:bg-red-700 transition-all active:scale-95"
                             >
                                 Start Discovering
                             </Link>

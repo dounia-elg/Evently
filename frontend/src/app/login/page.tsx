@@ -130,7 +130,7 @@ export default function LoginPage() {
 
                                 <button
                                     disabled={loading}
-                                    className="w-full py-6 bg-gray-900 text-white rounded-[2rem] font-black text-lg shadow-2xl hover:bg-black transition-all active:scale-95 flex items-center justify-center gap-4 mt-6 disabled:opacity-50 disabled:scale-100 group/btn"
+                                    className="w-full py-6 bg-gray-900 text-white rounded-4xl font-black text-lg shadow-2xl hover:bg-black transition-all active:scale-95 flex items-center justify-center gap-4 mt-6 disabled:opacity-50 disabled:scale-100 group/btn"
                                 >
                                     {loading ? 'Authenticating...' : 'Enter Platform'}
                                     <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />

@@ -13,11 +13,11 @@ export default function Navbar() {
                 <div className="flex justify-between items-center h-20">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2 group">
-                        <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-orange-200 group-hover:rotate-6 transition-transform">
+                        <div className="w-10 h-10 bg-linear-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-orange-200 group-hover:rotate-6 transition-transform">
                             <Ticket className="w-6 h-6" />
                         </div>
                         <span className="text-2xl font-black tracking-tighter text-gray-900">
-                            Event<span className="bg-gradient-to-r from-amber-500 via-orange-600 to-rose-600 bg-clip-text text-transparent">ly</span>
+                            Event<span className="bg-linear-to-r from-amber-500 via-orange-600 to-rose-600 bg-clip-text text-transparent">ly</span>
                         </span>
                     </Link>
 
