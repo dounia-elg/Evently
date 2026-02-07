@@ -15,3 +15,12 @@ export interface User {
     lastName: string;
     role: 'ADMIN' | 'PARTICIPANT';
 }
+
+export interface AuthContextType {
+    user: User | null;
+    token: string | null;
+    isLoading: boolean;
+    login: (userData: { user: User; access_token: string }) => void;
+    logout: () => void;
+    isAuthenticated: boolean;
+}
