@@ -13,11 +13,11 @@ export default function Navbar() {
                 <div className="flex justify-between items-center h-20">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2 group">
-                        <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-orange-200 group-hover:rotate-6 transition-transform">
+                        <div className="w-10 h-10 bg-linear-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-orange-200 group-hover:rotate-6 transition-transform">
                             <Ticket className="w-6 h-6" />
                         </div>
                         <span className="text-2xl font-black tracking-tighter text-gray-900">
-                            Event<span className="bg-gradient-to-r from-amber-500 via-orange-600 to-rose-600 bg-clip-text text-transparent">ly</span>
+                            Event<span className="bg-linear-to-r from-amber-500 via-orange-600 to-rose-600 bg-clip-text text-transparent">ly</span>
                         </span>
                     </Link>
 
@@ -40,14 +40,17 @@ export default function Navbar() {
                             </>
                         ) : (
                             <div className="flex items-center gap-6">
-                                <div className="hidden sm:flex items-center gap-3 px-4 py-2 bg-gray-50 rounded-2xl border border-gray-100">
+                                <Link
+                                    href={user?.role === 'ADMIN' ? '/admin' : '/participant'}
+                                    className="hidden sm:flex items-center gap-3 px-4 py-2 bg-gray-50 rounded-2xl border border-gray-100 hover:bg-white transition-all hover:shadow-sm"
+                                >
                                     <div className="w-8 h-8 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600">
                                         <UserIcon className="w-4 h-4" />
                                     </div>
                                     <span className="text-sm font-black text-gray-900">
                                         {user?.firstName}
                                     </span>
-                                </div>
+                                </Link>
                                 <button
                                     onClick={logout}
                                     className="p-3 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-2xl transition-all"

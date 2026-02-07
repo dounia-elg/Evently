@@ -44,10 +44,10 @@ export default function RegisterPage() {
             <main className="min-h-screen bg-gray-200 flex items-center justify-center p-4 pt-32 pb-20">
                 <div className="max-w-4xl w-full">
                     {/* The Registration Ticket */}
-                    <div className="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-gray-100 flex flex-col md:flex-row min-h-[600px] relative group">
+                    <div className="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-gray-100 flex flex-col md:flex-row min-h-96 relative group">
 
                         {/* Decorative Gradient Background (Behind card on hover) */}
-                        <div className="absolute -z-10 inset-0 bg-gradient-to-br from-orange-200/30 to-rose-200/30 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+                        <div className="absolute -z-10 inset-0 bg-linear-to-br from-orange-200/30 to-rose-200/30 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
 
                         {/* Left Side - Visual Sidebar (Red Concept) */}
                         <div className="md:w-5/12 bg-red-600 p-12 flex flex-col justify-between text-white relative overflow-hidden">
@@ -86,7 +86,7 @@ export default function RegisterPage() {
                         {/* Right Side - Form */}
                         <div className="md:w-7/12 p-8 lg:p-16 flex flex-col justify-center relative bg-white">
                             {/* Perforation Effect */}
-                            <div className="hidden md:block absolute left-[-12px] top-1/2 -translate-y-1/2 w-6 h-6 bg-gray-200 rounded-full border border-gray-100 shadow-inner"></div>
+                            <div className="hidden md:block absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-gray-200 rounded-full border border-gray-100 shadow-inner"></div>
 
                             <div className="max-w-md mx-auto w-full space-y-8">
                                 <div className="space-y-2">
@@ -165,7 +165,7 @@ export default function RegisterPage() {
 
                                     <button
                                         disabled={loading}
-                                        className="w-full py-6 bg-gray-900 text-white rounded-[2rem] font-black text-lg shadow-2xl hover:bg-black transition-all active:scale-95 flex items-center justify-center gap-4 mt-4 disabled:opacity-50 disabled:scale-100 group/btn"
+                                        className="w-full py-6 bg-gray-900 text-white rounded-4xl font-black text-lg shadow-2xl hover:bg-black transition-all active:scale-95 flex items-center justify-center gap-4 mt-4 disabled:opacity-50 disabled:scale-100 group/btn"
                                     >
                                         {loading ? 'Creating Entry...' : 'Join the Experience'}
                                         <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />

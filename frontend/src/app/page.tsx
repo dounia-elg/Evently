@@ -29,7 +29,7 @@ export default async function Home() {
             <div className="space-y-4">
               <h2 className="text-5xl font-black text-gray-900 tracking-tighter">
                 Upcoming
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-rose-600 to-amber-600">  Experiences</span>
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-orange-600 via-rose-600 to-amber-600">  Experiences</span>
               </h2>
             </div>
             <div className="hidden md:block">
@@ -52,13 +52,13 @@ export default async function Home() {
                   className="group relative flex flex-col h-full transition-all duration-500 hover:-translate-y-4"
                 >
                   {/* Creative Ticket Card */}
-                  <div className="relative bg-white rounded-[2.5rem] shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden flex flex-col flex-grow">
+                  <div className="relative bg-white rounded-[2.5rem] shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden flex flex-col grow">
 
                     {/* Top Section - Color Block */}
                     <div className="h-4 bg-red-600"></div>
 
                     {/* Main Content Area */}
-                    <div className="p-10 flex flex-col flex-grow">
+                    <div className="p-10 flex flex-col grow">
                       {/* Date Badge - Floating Creative Layout */}
                       <div className="flex justify-between items-start mb-8">
                         <div className="flex flex-col">
@@ -78,7 +78,7 @@ export default async function Home() {
                         {event.title}
                       </h3>
 
-                      <p className="text-gray-500 font-medium leading-relaxed line-clamp-2 mb-8 flex-grow">
+                      <p className="text-gray-500 font-medium leading-relaxed line-clamp-2 mb-8 grow">
                         {event.description}
                       </p>
 
@@ -102,7 +102,7 @@ export default async function Home() {
 
                       <Link
                         href={`/events/${event.id}`}
-                        className="w-full py-5 bg-gray-900 text-white rounded-[2rem] font-black text-lg transition-all flex items-center justify-center gap-3 hover:bg-black active:scale-95 shadow-xl shadow-gray-200 mt-4 group/btn text-center"
+                        className="w-full py-5 bg-gray-900 text-white rounded-4xl font-black text-lg transition-all flex items-center justify-center gap-3 hover:bg-black active:scale-95 shadow-xl shadow-gray-200 mt-4 group/btn text-center"
                       >
                         Get Ticket
                         <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-2 transition-transform" />
@@ -111,7 +111,7 @@ export default async function Home() {
                   </div>
 
                   {/* Creative Offset Decoration */}
-                  <div className="absolute -z-10 bottom-[-10px] left-[-10px] w-full h-full bg-gradient-to-br from-orange-200/20 to-rose-200/20 rounded-[2.5rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                  <div className="absolute -z-10 bottom-2.5 -left-2.5 w-full h-full bg-linear-to-br from-orange-200/20 to-rose-200/20 rounded-[2.5rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                 </div>
               ))}
             </div>

@@ -58,3 +58,25 @@ export const updateReservationStatus = async (id: string, status: string) => {
   const response = await api.patch(`/reservations/${id}/status`, { status });
   return response.data;
 };
+
+export const getMyReservations = async () => {
+  const response = await api.get('/reservations/me');
+  return response.data;
+};
+
+export const downloadTicket = async (reservationId: string) => {
+  const response = await api.get(`/tickets/${reservationId}/download`, {
+    responseType: 'blob',
+  });
+  return response.data;
+};
+
+export const cancelReservation = async (id: string) => {
+  const response = await api.delete(`/reservations/${id}`);
+  return response.data;
+};
+
+export const createReservation = async (eventId: string) => {
+  const response = await api.post('/reservations', { eventId });
+  return response.data;
+};

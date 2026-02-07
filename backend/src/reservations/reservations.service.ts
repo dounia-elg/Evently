@@ -110,4 +110,12 @@ export class ReservationsService {
       order: { createdAt: 'DESC' }
     });
   }
+
+  async findByParticipant(userId: string): Promise<Reservation[]> {
+    return this.reservationRepo.find({
+      where: { participant: { id: userId } },
+      relations: ['event'],
+      order: { createdAt: 'DESC' }
+    });
+  }
 }
