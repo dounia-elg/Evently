@@ -48,3 +48,13 @@ export const createEvent = async (data: any) => {
   const response = await api.post('/events', data);
   return response.data;
 };
+
+export const getAllReservationsAdmin = async () => {
+  const response = await api.get('/reservations/all');
+  return response.data;
+};
+
+export const updateReservationStatus = async (id: string, status: string) => {
+  const response = await api.patch(`/reservations/${id}/status`, { status });
+  return response.data;
+};
