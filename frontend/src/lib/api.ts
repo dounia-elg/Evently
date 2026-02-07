@@ -16,3 +16,8 @@ export const getEventById = async (id: string) => {
   const response = await api.get(`/events/${id}`);
   return response.data;
 };
+
+export const registerUser = async (data: any) => {
+  const response = await api.post('/auth/register', data);
+  return response.data;
+};
