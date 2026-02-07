@@ -17,19 +17,18 @@ export default function Navbar() {
                     </Link>
 
                     {/* Navigation Buttons */}
-                    <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-4 sm:gap-8">
                         <Link
                             href="/login"
-                            className="text-gray-600 hover:text-orange-600 font-bold transition-colors hidden sm:block"
+                            className="text-gray-900 font-black text-sm uppercase tracking-widest hover:text-orange-600 transition-colors"
                         >
                             Login
                         </Link>
                         <Link
                             href="/register"
-                            className="relative group px-7 py-3 bg-gray-900 text-white rounded-2xl font-bold transition-all hover:bg-black hover:scale-105 active:scale-95 shadow-xl shadow-gray-200"
+                            className="px-6 sm:px-10 py-3 sm:py-4 bg-gray-900 text-white font-black rounded-full hover:bg-black transition-all active:scale-95 shadow-xl shadow-gray-200/50 uppercase tracking-widest text-[10px] sm:text-xs"
                         >
-                            <span className="relative z-10">Sign Up</span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-amber-500 to-rose-500 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
+                            Join Now
                         </Link>
                     </div>
                 </div>
