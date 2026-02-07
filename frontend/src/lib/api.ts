@@ -43,3 +43,8 @@ export const updateEventStatus = async (id: string, status: string) => {
   const response = await api.patch(`/events/${id}/status`, { status });
   return response.data;
 };
+
+export const createEvent = async (data: any) => {
+  const response = await api.post('/events', data);
+  return response.data;
+};

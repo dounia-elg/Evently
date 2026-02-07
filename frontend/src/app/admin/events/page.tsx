@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Eye, Edit3, CheckCircle, XCircle, Clock, Search, AlertCircle } from 'lucide-react';
+import { Eye, Edit3, CheckCircle, XCircle, Clock, AlertCircle, Plus } from 'lucide-react';
 import { getAllEventsAdmin, updateEventStatus } from '@/lib/api';
 import { Event } from '@/types';
 
@@ -10,7 +10,6 @@ export default function AdminEventsPage() {
     const [events, setEvents] = useState<Event[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const [search, setSearch] = useState('');
 
     useEffect(() => {
         fetchEvents();
@@ -39,10 +38,6 @@ export default function AdminEventsPage() {
         }
     };
 
-    const filteredEvents = events.filter(ev =>
-        ev.title.toLowerCase().includes(search.toLowerCase()) ||
-        ev.location.toLowerCase().includes(search.toLowerCase())
-    );
 
     const getStatusIcon = (status: string) => {
         switch (status) {
@@ -54,21 +49,14 @@ export default function AdminEventsPage() {
 
     return (
         <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-[2rem] border border-gray-200">
-                <div className="relative w-full sm:w-96">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                    <input
-                        type="text"
-                        placeholder="Search events by title or location..."
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-red-500/10 focus:border-red-500 font-bold text-sm"
-                    />
-                </div>
-                <div className="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-600 rounded-xl text-xs font-black uppercase tracking-widest">
-                    <Activity className="w-4 h-4" />
-                    {filteredEvents.length} Total Records
-                </div>
+            <div className="flex justify-end bg-gray-100 p-6 rounded-[2rem] ">
+                <Link
+                    href="/admin/events/new"
+                    className="flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-black transition-all active:scale-95 shadow-lg shadow-gray-200"
+                >
+                    <Plus className="w-4 h-4" />
+                    New Event
+                </Link>
             </div>
 
             {error && (
@@ -96,8 +84,8 @@ export default function AdminEventsPage() {
                                         <td colSpan={4} className="px-8 py-8"><div className="h-4 bg-gray-100 rounded w-full"></div></td>
                                     </tr>
                                 ))
-                            ) : filteredEvents.length > 0 ? (
-                                filteredEvents.map((event) => (
+                            ) : events.length > 0 ? (
+                                events.map((event) => (
                                     <tr key={event.id} className="hover:bg-gray-50/50 transition-colors group">
                                         <td className="px-8 py-6">
                                             <div className="flex items-center gap-4">
@@ -165,7 +153,7 @@ export default function AdminEventsPage() {
                             ) : (
                                 <tr>
                                     <td colSpan={4} className="px-8 py-20 text-center text-gray-400 font-bold">
-                                        No events found matching your search.
+                                        No events found.
                                     </td>
                                 </tr>
                             )}
@@ -177,13 +165,6 @@ export default function AdminEventsPage() {
     );
 }
 
-function Activity({ className }: { className?: string }) {
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-        </svg>
-    )
-}
 
 function Ticket({ className }: { className?: string }) {
     return (
