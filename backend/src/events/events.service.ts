@@ -12,7 +12,7 @@ export class EventsService {
   constructor(
     @InjectRepository(Event)
     private repo: Repository<Event>,
-  ) {}
+  ) { }
 
   async create(dto: CreateEventDto, admin: User): Promise<Event> {
     const event = this.repo.create({
@@ -40,8 +40,26 @@ export class EventsService {
     event.status = newStatus;
     return this.repo.save(event);
   }
-  
+
   async findPublished(): Promise<Event[]> {
     return this.repo.find({ where: { status: EventStatus.PUBLISHED } });
+  }
+
+  async findOnePublished(id: string): Promise<Event> {
+    try {
+      console.log(`Fetching published event with ID: ${id}`);
+      const event = await this.repo.findOne({
+        where: {
+          id: id as any,
+          status: EventStatus.PUBLISHED
+        }
+      });
+      console.log('Event found:', event ? event.title : 'None');
+      if (!event) throw new NotFoundException('Event not found or not published');
+      return event;
+    } catch (error) {
+      console.error('Error in findOnePublished:', error);
+      throw error;
+    }
   }
 }
