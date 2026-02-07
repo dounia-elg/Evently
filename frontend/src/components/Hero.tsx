@@ -73,7 +73,7 @@ export default function Hero() {
                     {/* Right Side - Visual Section */}
                     <div className="relative lg:block">
                         {/* Main Image Decoration */}
-                        <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-[12px] border-white">
+                        <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-[12px] border-red-600">
                             <img
                                 src="https://www.prestagency.com/photos/590x662/technique_led1.jpg"
                                 alt="Event Atmosphere"
@@ -100,10 +100,6 @@ export default function Hero() {
                             </div>
                         </div>
 
-                        {/* Floating elements */}
-                        <div className="absolute -top-12 -right-12 w-32 h-32 bg-amber-500 rounded-full flex items-center justify-center text-white font-black text-xl rotate-12 shadow-xl animate-float">
-                            JOIN <br /> US!
-                        </div>
                     </div>
                 </div>
             </div>
