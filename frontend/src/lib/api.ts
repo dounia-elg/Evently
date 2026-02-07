@@ -66,12 +66,17 @@ export const getMyReservations = async () => {
 
 export const downloadTicket = async (reservationId: string) => {
   const response = await api.get(`/tickets/${reservationId}/download`, {
-    responseType: 'blob', 
+    responseType: 'blob',
   });
   return response.data;
 };
 
 export const cancelReservation = async (id: string) => {
   const response = await api.delete(`/reservations/${id}`);
+  return response.data;
+};
+
+export const createReservation = async (eventId: string) => {
+  const response = await api.post('/reservations', { eventId });
   return response.data;
 };

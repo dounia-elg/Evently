@@ -1,20 +1,79 @@
-import { getEventById } from '@/lib/api';
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import { getEventById, createReservation } from '@/lib/api';
 import Navbar from '@/components/Navbar';
-import { Calendar, MapPin, Users, ArrowLeft, Ticket } from 'lucide-react';
+import { Calendar, MapPin, Users, ArrowLeft, Ticket, CheckCircle, Loader2 } from 'lucide-react';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
+import { Event } from '@/types';
 
-export default async function EventDetails({ params }: { params: Promise<{ id: string }> }) {
-    const { id } = await params;
-    let event;
-    try {
-        event = await getEventById(id);
-    } catch (error) {
-        console.error('Error fetching event:', error);
-        return notFound();
-    }
+export default function EventDetails() {
+    const { id } = useParams();
+    const router = useRouter();
+    const { isAuthenticated } = useAuth();
 
-    if (!event) return notFound();
+    const [event, setEvent] = useState<Event | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [reserving, setReserving] = useState(false);
+    const [reserved, setReserved] = useState(false);
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        if (id) {
+            fetchEvent();
+        }
+    }, [id]);
+
+    const fetchEvent = async () => {
+        try {
+            const data = await getEventById(id as string);
+            setEvent(data);
+        } catch (err) {
+            console.error('Error fetching event:', err);
+            setError('Experience not found or platform error.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleReserve = async () => {
+        if (!isAuthenticated) {
+            router.push('/login');
+            return;
+        }
+
+        setReserving(true);
+        try {
+            await createReservation(id as string);
+            setReserved(true);
+            setTimeout(() => {
+                router.push('/participant');
+            }, 2000);
+        } catch (err: any) {
+            console.error('Reservation failed:', err);
+            alert(err.response?.data?.message || 'Failed to secure your spot. Try again.');
+        } finally {
+            setReserving(false);
+        }
+    };
+
+    if (loading) return (
+        <div className="min-h-screen bg-gray-200 flex items-center justify-center">
+            <Loader2 className="w-12 h-12 text-gray-900 animate-spin" />
+        </div>
+    );
+
+    if (error || !event) return (
+        <div className="min-h-screen bg-gray-200 flex flex-col items-center justify-center p-8 text-center">
+            <h1 className="text-4xl font-black text-gray-900 mb-4 uppercase">Experience Missing</h1>
+            <p className="text-gray-500 font-bold mb-8 uppercase tracking-widest">{error || 'This protocol does not exist.'}</p>
+            <Link href="/" className="px-8 py-4 bg-gray-900 text-white rounded-[2rem] font-black uppercase tracking-widest">
+                Return to Directory
+            </Link>
+        </div>
+    );
 
     return (
         <>
@@ -30,12 +89,11 @@ export default async function EventDetails({ params }: { params: Promise<{ id: s
                         Back to Experiences
                     </Link>
 
-                    {/* Creative Event Detail Card (Ticket Inspired) */}
+                    {/* Creative Event Detail Card */}
                     <div className="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-gray-100 flex flex-col md:flex-row min-h-[600px]">
 
-                        {/* Left Side - Visual/Status (Red Bar Concept) */}
+                        {/* Left Side */}
                         <div className="md:w-1/3 bg-red-600 p-12 flex flex-col justify-between text-white relative overflow-hidden">
-                            {/* Texture Overlay */}
                             <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
                                 backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E")`
                             }}></div>
@@ -44,7 +102,7 @@ export default async function EventDetails({ params }: { params: Promise<{ id: s
                                 <div className="px-4 py-2 bg-white/20 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-widest border border-white/30 w-fit mb-8">
                                     Official Access
                                 </div>
-                                <h1 className="text-5xl font-black tracking-tighter leading-[0.9] mb-6">
+                                <h1 className="text-5xl font-black tracking-tighter leading-[0.9] mb-6 animate-in fade-in slide-in-from-left duration-700">
                                     {event.title}
                                 </h1>
                             </div>
@@ -62,7 +120,7 @@ export default async function EventDetails({ params }: { params: Promise<{ id: s
                             </div>
                         </div>
 
-                        {/* Right Side - Details */}
+                        {/* Right Side */}
                         <div className="md:w-2/3 p-12 lg:p-16 flex flex-col justify-between relative">
                             {/* Perforation Effect */}
                             <div className="hidden md:block absolute left-[-12px] top-1/2 -translate-y-1/2 w-6 h-6 bg-gray-200 rounded-full border border-gray-100 shadow-inner"></div>
@@ -115,11 +173,32 @@ export default async function EventDetails({ params }: { params: Promise<{ id: s
                             </div>
 
                             <div className="mt-16">
-                                <button className="w-full py-6 bg-gray-900 text-white rounded-[2.5rem] font-black text-xl shadow-2xl hover:bg-black transition-all active:scale-95 flex items-center justify-center gap-4">
-                                    Reserve My Spot 🎫
+                                <button
+                                    onClick={handleReserve}
+                                    disabled={reserving || reserved}
+                                    className={`w-full py-6 rounded-[2.5rem] font-black text-xl shadow-2xl transition-all active:scale-95 flex items-center justify-center gap-4 ${reserved
+                                            ? 'bg-green-500 text-white cursor-default'
+                                            : 'bg-gray-900 text-white hover:bg-black'
+                                        } disabled:opacity-70`}
+                                >
+                                    {reserving ? (
+                                        <>
+                                            <Loader2 className="w-6 h-6 animate-spin" />
+                                            Securing Spot...
+                                        </>
+                                    ) : reserved ? (
+                                        <>
+                                            <CheckCircle className="w-6 h-6" />
+                                            Spot Secured!
+                                        </>
+                                    ) : (
+                                        <>
+                                            Reserve My Spot 🎫
+                                        </>
+                                    )}
                                 </button>
                                 <p className="text-center text-gray-400 text-xs mt-6 font-bold uppercase tracking-widest">
-                                    Secured by Evently Platform
+                                    {reserved ? 'Redirecting to your dashboard...' : 'Secured by Evently Platform'}
                                 </p>
                             </div>
                         </div>
