@@ -1,4 +1,5 @@
-import { IsString, IsInt, IsDateString, MinLength, Min } from 'class-validator';
+import { IsString, IsInt, IsDateString, MinLength, Min, IsEnum, IsOptional } from 'class-validator';
+import { EventStatus } from '../entities/event.entity';
 
 export class CreateEventDto {
   @IsString()
@@ -17,4 +18,8 @@ export class CreateEventDto {
   @IsInt()
   @Min(1)
   maxCapacity: number;
+
+  @IsEnum(EventStatus)
+  @IsOptional()
+  status?: EventStatus;
 }
