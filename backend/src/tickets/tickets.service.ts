@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import PDFDocument from 'pdfkit';
 import { Ticket } from './entities/ticket.entity';
+import { Reservation } from '../reservations/entities/reservation.entity';
 
 @Injectable()
 export class TicketsService {
@@ -11,15 +12,19 @@ export class TicketsService {
     private ticketRepo: Repository<Ticket>,
   ) {}
 
-  async createTicket(reservation: any): Promise<Ticket> {
+  async createTicket(reservation: Reservation): Promise<Ticket> {
     const ticket = this.ticketRepo.create({ reservation });
     return this.ticketRepo.save(ticket);
   }
 
   async findByReservationId(reservationId: string): Promise<Ticket | null> {
-    return this.ticketRepo.findOne({ 
+    return this.ticketRepo.findOne({
       where: { reservation: { id: reservationId } },
-      relations: ['reservation', 'reservation.event', 'reservation.participant']
+      relations: [
+        'reservation',
+        'reservation.event',
+        'reservation.participant',
+      ],
     });
   }
 
@@ -33,15 +38,17 @@ export class TicketsService {
 
       doc.fontSize(20).text('OFFICIAL TICKET', { align: 'center' });
       doc.moveDown();
-      
-      doc.fontSize(12).text(`Ticket ID: ${ticket.id}`); 
+
+      doc.fontSize(12).text(`Ticket ID: ${ticket.id}`);
       doc.moveDown();
       doc.text(`Event: ${ticket.reservation.event.title}`);
       doc.text(`Date: ${ticket.reservation.event.dateTime.toLocaleString()}`);
       doc.text(`Location: ${ticket.reservation.event.location}`);
       doc.moveDown();
-      doc.text(`Guest: ${ticket.reservation.participant.firstName} ${ticket.reservation.participant.lastName}`);
-      
+      doc.text(
+        `Guest: ${ticket.reservation.participant.firstName} ${ticket.reservation.participant.lastName}`,
+      );
+
       doc.end();
     });
   }

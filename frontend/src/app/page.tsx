@@ -13,8 +13,8 @@ export default async function Home() {
     // SSR Fetch from Backend
     events = await getPublishedEvents();
   } catch (e) {
+    // Graceful fallback for build-time or backend downtime
     error = "Failed to load events. Is the backend running?";
-    console.error(e);
   }
 
   return (

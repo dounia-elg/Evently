@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
+import {
+  Injectable,
+  UnauthorizedException,
+  ConflictException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import { RegisterDto, LoginDto } from './dto/auth.dto';
@@ -22,17 +26,17 @@ export class AuthService {
   async login(dto: LoginDto) {
     const user = await this.usersService.validate(dto.email, dto.password);
     if (!user) throw new UnauthorizedException('Invalid credentials');
-    
+
     return this.generateToken(user);
   }
 
   private generateToken(user: User) {
-    const payload = { 
-      sub: user.id, 
+    const payload = {
+      sub: user.id,
       email: user.email,
-      role: user.role 
+      role: user.role,
     };
-    
+
     return {
       access_token: this.jwtService.sign(payload),
       user: {

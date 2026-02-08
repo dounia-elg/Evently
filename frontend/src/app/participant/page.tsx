@@ -25,7 +25,7 @@ export default function ParticipantDashboard() {
         try {
             const data = await getMyReservations();
             setReservations(data);
-        } catch (err: any) {
+        } catch (err) {
             console.error('Failed to load dashboard:', err);
             setError('Could not fetch your reservations. Please try again later.');
         } finally {
@@ -114,9 +114,9 @@ export default function ParticipantDashboard() {
                                 <div className="flex-1 p-8 sm:p-10 relative">
                                     <div className="flex justify-between items-start mb-6">
                                         <div className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border ${res.status === 'CONFIRMED' ? 'bg-green-50 text-green-600 border-green-100' :
-                                                res.status === 'REFUSED' ? 'bg-red-50 text-red-600 border-red-100' :
-                                                    res.status === 'CANCELED' ? 'bg-gray-50 text-gray-400 border-gray-100' :
-                                                        'bg-orange-50 text-orange-600 border-orange-100'
+                                            res.status === 'REFUSED' ? 'bg-red-50 text-red-600 border-red-100' :
+                                                res.status === 'CANCELED' ? 'bg-gray-50 text-gray-400 border-gray-100' :
+                                                    'bg-orange-50 text-orange-600 border-orange-100'
                                             }`}>
                                             {res.status}
                                         </div>

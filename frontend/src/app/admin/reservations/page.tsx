@@ -19,7 +19,7 @@ export default function AdminReservationsPage() {
         try {
             const data = await getAllReservationsAdmin();
             setReservations(data);
-        } catch (err: any) {
+        } catch (err) {
             console.error('Failed to fetch reservations:', err);
             setError('Could not load reservations. Check if your backend is running.');
         } finally {
@@ -30,10 +30,11 @@ export default function AdminReservationsPage() {
     const handleStatusUpdate = async (id: string, newStatus: string) => {
         try {
             await updateReservationStatus(id, newStatus);
-            setReservations(reservations.map(res => res.id === id ? { ...res, status: newStatus as any } : res));
-        } catch (err: any) {
-            console.error('Status update failed:', err);
-            alert(err.response?.data?.message || 'Failed to update reservation status.');
+            setReservations(reservations.map(res => res.id === id ? { ...res, status: newStatus as Reservation['status'] } : res));
+        } catch (err: unknown) {
+            const error = err as { response?: { data?: { message?: string } } };
+            console.error('Status update failed:', error);
+            alert(error.response?.data?.message || 'Failed to update reservation status.');
         }
     };
 
