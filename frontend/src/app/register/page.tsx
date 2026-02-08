@@ -6,6 +6,9 @@ import { useRouter } from 'next/navigation';
 import { Ticket, ArrowRight, User, Mail, Lock, Sparkles } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import { registerUser } from '@/lib/api';
+import axios from 'axios';
+
+type ApiError = { message?: string };
 
 export default function RegisterPage() {
     const router = useRouter();
@@ -26,9 +29,12 @@ export default function RegisterPage() {
         try {
             await registerUser(formData);
             router.push('/login?registered=true');
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error('Registration failed:', err);
-            setError(err.response?.data?.message || 'Registration failed. Please try again.');
+            const message = axios.isAxiosError<ApiError>(err)
+                ? err.response?.data?.message
+                : undefined;
+            setError(message || 'Registration failed. Please try again.');
         } finally {
             setLoading(false);
         }

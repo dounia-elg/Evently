@@ -1,25 +1,21 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { User, AuthContextType } from '@/types';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-    const [user, setUser] = useState<User | null>(null);
-    const [token, setToken] = useState<string | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        const savedToken = localStorage.getItem('token');
+    const [user, setUser] = useState<User | null>(() => {
+        if (typeof window === 'undefined') return null;
         const savedUser = localStorage.getItem('user');
-
-        if (savedToken && savedUser) {
-            setToken(savedToken);
-            setUser(JSON.parse(savedUser));
-        }
-        setIsLoading(false);
-    }, []);
+        return savedUser ? (JSON.parse(savedUser) as User) : null;
+    });
+    const [token, setToken] = useState<string | null>(() => {
+        if (typeof window === 'undefined') return null;
+        return localStorage.getItem('token');
+    });
+    const [isLoading] = useState(false);
 
     const login = (data: { user: User; access_token: string }) => {
         setToken(data.access_token);

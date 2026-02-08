@@ -1,46 +1,102 @@
-# Evently
+# Evently 📅
 
-Evently is a web application for managing events and reservations within an organization
-(training center, company, association, coworking space).
-
-It centralizes events, participants, and bookings while ensuring security,
-role-based access, and software quality.
+Evently is a modern, full-stack web application designed for managing events and reservations within various organizations (training centers, companies, associations, coworking spaces). It simplifies event lifecycle management while ensuring security, role-based access control, and a seamless user experience.
 
 ---
 
-## Features
-- Event management (create, update, publish, cancel)
-- Public events catalog
-- Event capacity and availability management
-- Event reservations with status lifecycle
-- PDF ticket / confirmation for confirmed bookings
-- Secure authentication and role-based authorization
+## 🚀 Built With
+
+### Backend
+*   **Framework**: [NestJS](https://nestjs.com/) (TypeScript)
+*   **Database**: [PostgreSQL](https://www.postgresql.org/) with [TypeORM](https://typeorm.io/)
+*   **Security**: [Passport.js](https://www.passportjs.org/), [JWT](https://jwt.io/), and [Bcrypt](https://github.com/kelektiv/node.bcrypt.js)
+*   **Utilities**: [PDFKit](https://pdfkit.org/) for ticket generation, [class-validator](https://github.com/typestack/class-validator) for DTO validation
+
+### Frontend
+*   **Framework**: [Next.js](https://nextjs.org/) (TypeScript, App Router)
+*   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+*   **Icons**: [Lucide React](https://lucide.dev/)
+*   **API Client**: [Axios](https://axios-http.com/)
+
+### Infrastructure & DevOps
+*   **Containerization**: [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/)
+*   **CI/CD**: GitHub Actions
 
 ---
 
-## User Roles
-- **Admin**: manages events and reservations
-- **Participant**: browses events and makes reservations
+## ✨ Key Features
+
+- **Event Management**: Create, update, publish, and cancel events with ease.
+- **Public Catalog**: Browse upcoming events with real-time capacity and availability tracking.
+- **Reservation System**: Secure booking flow with status lifecycle management.
+- **Automated Ticketing**: Generate PDF tickets/confirmations for confirmed reservations.
+- **RBAC (Role-Based Access Control)**:
+    - **Admin**: Full control over events, reservations, and system settings.
+    - **Participant**: Search events and manage personal reservations.
+- **Modular Architecture**: Clean, scalable codebase following industry best practices.
 
 ---
 
-## Tech Stack
-- **Back-end**: NestJS (TypeScript)
-- **Front-end**: Next.js (TypeScript)
-- **Database**: PostgreSQL or MongoDB
-- **DevOps**: Docker, Docker Compose, GitHub Actions (CI/CD)
+## 🛠️ Getting Started
+
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v18+)
+- [Docker](https://www.docker.com/get-started) & [Docker Compose](https://docs.docker.com/compose/install/)
+
+### Quick Start (Docker - Recommended)
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/dounia-elg/Evently.git
+    cd Evently
+    ```
+2.  **Set up environment variables**:
+    ```bash
+    cp .env.example .env
+    ```
+3.  **Spin up the entire stack**:
+    ```bash
+    docker-compose up --build
+    ```
+    *   Frontend: [http://localhost:3002](http://localhost:3002)
+    *   Backend API: [http://localhost:3003/api](http://localhost:3003/api)
+
+### Manual Development Setup
+#### Backend
+```bash
+cd backend
+npm install
+npm run start:dev
+```
+#### Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
 ---
 
-## Quality & Security
-- Modular architecture
-- Input validation and error handling
-- Protected routes
-- Automated tests (front-end & back-end)
+## 🧪 Testing
+
+```bash
+# Backend tests
+cd backend
+npm run test      # Unit tests
+npm run test:e2e  # E2E tests
+
+# Linting
+npm run lint
+```
 
 ---
 
-## Context
-Individual academic project focused on clean architecture,
-security, testing, and best development practices.
-# Evently
+## 🔒 Security & Quality
+- **Data Integrity**: Strict input validation using `class-validator`.
+- **Protected Routes**: Middleware and Guards ensure only authorized users access sensitive endpoints.
+- **Clean Code**: Consistent formatting with Prettier and ESLint.
+- **Environment Safety**: Configuration management via `@nestjs/config`.
+
+---
+
+## 📄 License
+This project is [UNLICENSED](LICENSE).

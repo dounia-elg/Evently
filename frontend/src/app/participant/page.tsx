@@ -9,7 +9,7 @@ import { Ticket as TicketIcon, Calendar, MapPin, Download, Trash2, Clock, CheckC
 import Link from 'next/link';
 
 export default function ParticipantDashboard() {
-    const { user, logout } = useAuth();
+    const { user } = useAuth();
     const [reservations, setReservations] = useState<Reservation[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -180,7 +180,7 @@ export default function ParticipantDashboard() {
                             </div>
                             <h3 className="text-2xl font-black text-gray-900 uppercase tracking-tight">No Active Protocols</h3>
                             <p className="text-gray-500 font-bold max-w-xs mt-2">
-                                You haven't reserved any experiences yet. Browse the platform to join in.
+                                You haven&apos;t reserved any experiences yet. Browse the platform to join in.
                             </p>
                             <Link
                                 href="/"
