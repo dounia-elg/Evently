@@ -11,7 +11,6 @@ import { ReservationsModule } from './reservations/reservations.module';
 import { Ticket } from './tickets/entities/ticket.entity';
 import { TicketsModule } from './tickets/tickets.module';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -23,9 +22,9 @@ import { TicketsModule } from './tickets/tickets.module';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       entities: [User, Event, Reservation, Ticket],
-      synchronize: true, 
+      synchronize: true,
     }),
-    
+
     AuthModule,
     UsersModule,
     EventsModule,

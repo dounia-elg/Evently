@@ -51,9 +51,10 @@ export default function EventDetails() {
             setTimeout(() => {
                 router.push('/participant');
             }, 2000);
-        } catch (err: any) {
-            console.error('Reservation failed:', err);
-            alert(err.response?.data?.message || 'Failed to secure your spot. Try again.');
+        } catch (err: unknown) {
+            const error = err as { response?: { data?: { message?: string } } };
+            console.error('Reservation failed:', error);
+            alert(error.response?.data?.message || 'Failed to secure your spot. Try again.');
         } finally {
             setReserving(false);
         }
@@ -177,8 +178,8 @@ export default function EventDetails() {
                                     onClick={handleReserve}
                                     disabled={reserving || reserved}
                                     className={`w-full py-6 rounded-[2.5rem] font-black text-xl shadow-2xl transition-all active:scale-95 flex items-center justify-center gap-4 ${reserved
-                                            ? 'bg-green-500 text-white cursor-default'
-                                            : 'bg-gray-900 text-white hover:bg-black'
+                                        ? 'bg-green-500 text-white cursor-default'
+                                        : 'bg-gray-900 text-white hover:bg-black'
                                         } disabled:opacity-70`}
                                 >
                                     {reserving ? (

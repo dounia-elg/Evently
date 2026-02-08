@@ -7,12 +7,9 @@ import { ReservationsController } from './reservations.controller';
 import { TicketsModule } from '../tickets/tickets.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Reservation, Event]),
-    TicketsModule,
-  ],
+  imports: [TypeOrmModule.forFeature([Reservation, Event]), TicketsModule],
   providers: [ReservationsService],
   controllers: [ReservationsController],
   exports: [ReservationsService],
 })
-export class ReservationsModule { }
+export class ReservationsModule {}

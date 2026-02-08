@@ -1,6 +1,5 @@
 import { IsString, IsInt, IsDateString, MinLength, Min } from 'class-validator';
 
-
 export class UpdateEventDto {
   @IsString()
   @MinLength(3)
@@ -18,5 +17,4 @@ export class UpdateEventDto {
   @IsInt()
   @Min(1)
   maxCapacity: number;
-
 }

@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, CreateDateColumn, OneToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
 import { Reservation } from '../../reservations/entities/reservation.entity';
 
 @Entity('tickets')

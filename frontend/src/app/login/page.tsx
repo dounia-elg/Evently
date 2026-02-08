@@ -35,9 +35,10 @@ function LoginContent() {
             } else {
                 router.push('/participant');
             }
-        } catch (err: any) {
-            console.error('Login failed:', err);
-            setError(err.response?.data?.message || 'Invalid email or password');
+        } catch (err: unknown) {
+            const error = err as { response?: { data?: { message?: string } } };
+            console.error('Login failed:', error);
+            setError(error.response?.data?.message || 'Invalid email or password');
         } finally {
             setLoading(false);
         }

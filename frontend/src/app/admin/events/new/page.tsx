@@ -32,9 +32,10 @@ export default function NewEventPage() {
                 maxCapacity: Number(formData.maxCapacity),
             });
             router.push('/admin/events');
-        } catch (err: any) {
-            console.error('Failed to create event:', err);
-            setError(err.response?.data?.message || 'Failed to create event. Please check your data.');
+        } catch (err: unknown) {
+            const error = err as { response?: { data?: { message?: string } } };
+            console.error('Failed to create event:', error);
+            setError(error.response?.data?.message || 'Failed to create event. Please check your data.');
         } finally {
             setLoading(false);
         }

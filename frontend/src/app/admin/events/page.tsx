@@ -20,7 +20,7 @@ export default function AdminEventsPage() {
         try {
             const data = await getAllEventsAdmin();
             setEvents(data);
-        } catch (err: any) {
+        } catch (err) {
             console.error('Failed to fetch events:', err);
             setError('Could not load events. Check if your backend is running.');
         } finally {
@@ -31,7 +31,7 @@ export default function AdminEventsPage() {
     const handleStatusUpdate = async (id: string, newStatus: string) => {
         try {
             await updateEventStatus(id, newStatus);
-            setEvents(events.map(ev => ev.id === id ? { ...ev, status: newStatus as any } : ev));
+            setEvents(events.map(ev => ev.id === id ? { ...ev, status: newStatus as Event['status'] } : ev));
         } catch (err) {
             console.error('Status update failed:', err);
             alert('Failed to update status. Only Admins can perform this action.');

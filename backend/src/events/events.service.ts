@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Event } from './entities/event.entity';
@@ -12,7 +16,7 @@ export class EventsService {
   constructor(
     @InjectRepository(Event)
     private repo: Repository<Event>,
-  ) { }
+  ) {}
 
   async create(dto: CreateEventDto, admin: User): Promise<Event> {
     const event = this.repo.create({
@@ -50,12 +54,13 @@ export class EventsService {
       console.log(`Fetching published event with ID: ${id}`);
       const event = await this.repo.findOne({
         where: {
-          id: id as any,
-          status: EventStatus.PUBLISHED
-        }
+          id,
+          status: EventStatus.PUBLISHED,
+        },
       });
       console.log('Event found:', event ? event.title : 'None');
-      if (!event) throw new NotFoundException('Event not found or not published');
+      if (!event)
+        throw new NotFoundException('Event not found or not published');
       return event;
     } catch (error) {
       console.error('Error in findOnePublished:', error);
