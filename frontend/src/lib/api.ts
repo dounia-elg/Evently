@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { Event, Reservation, User } from '@/types';
 
+type AuthResponse = { user: User; access_token: string };
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
 
 export const api = axios.create({
@@ -25,12 +27,12 @@ export const getEventById = async (id: string): Promise<Event> => {
   return response.data;
 };
 
-export const registerUser = async (data: Record<string, string>): Promise<{ user: User; access_token: string }> => {
+export const registerUser = async (data: Record<string, string>): Promise<AuthResponse> => {
   const response = await api.post('/auth/register', data);
   return response.data;
 };
 
-export const loginUser = async (data: Record<string, string>): Promise<{ user: User; access_token: string }> => {
+export const loginUser = async (data: Record<string, string>): Promise<AuthResponse> => {
   const response = await api.post('/auth/login', data);
   return response.data;
 };
@@ -45,7 +47,7 @@ export const updateEventStatus = async (id: string, status: string): Promise<Eve
   return response.data;
 };
 
-export const createEvent = async (data: Record<string, any>): Promise<Event> => {
+export const createEvent = async (data: Record<string, unknown>): Promise<Event> => {
   const response = await api.post('/events', data);
   return response.data;
 };
